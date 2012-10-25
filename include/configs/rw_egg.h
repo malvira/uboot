@@ -153,7 +153,7 @@
 #endif
 
 /* Linux boot using network */
-#define CONFIG_BOOTCOMMAND		"run sdmmc_boot"
+#define CONFIG_BOOTCOMMAND		"run sdbootscr"
 
 /*
  * Serial Driver Console
@@ -180,6 +180,7 @@
 "net_boot=dhcp; run nfsargs; bootm $(loadaddr)\0" \
 "spi_boot= sf probe 0 0 0; sf read $(loadaddr) 0x42000 0x200000; run nfsargs; bootm $(loadaddr)\0" \
 "nand_boot= nand read $(loadaddr) 0x80000 0x200000; run ramargs; bootm $(loadaddr)\0" \
+"sdbootscr= mmc init; fatload mmc1 0 0x30000000 boot.scr; source 0x30000000\0" \
 "sdmmc_boot= mmc init; fatload mmc 0 $(loadaddr) $(bootfile); run ramargs; bootm $(loadaddr)\0" \
 "usbdfu_boot= usbpoll $(loadaddr); run nfsargs; bootm $(loadaddr)\0" \
 "usb_boot= usb start; fatload usb 0 $(loadaddr) $(bootfile); run nfsargs; bootm $(loadaddr)\0" \
